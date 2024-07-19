@@ -27,7 +27,16 @@ export default function Home() {
   // Overall map view
   return (
     <div className="h-screen">
-        <Stage width={window.innerWidth} height={window.innerHeight} draggable={true}>
+        <Stage width={window.innerWidth} height={window.innerHeight} draggable={true} dragBoundFunc={
+          (pos) => {
+            console.log(pos);
+            // clamp a 1000x1000 window
+            return {
+              x: Math.min(0, Math.max(pos.x, -1000 + window.innerWidth)),
+              y: Math.min(0, Math.max(pos.y, -900 + window.innerHeight))
+            };
+          }
+        }>
           <Layer>
             {/* example image */}
             <KonvaURLImage src="/labelled_map.png" />
@@ -36,15 +45,25 @@ export default function Home() {
             {/* Add tappable pins */}
             {submaps.map((submap, index) => {
               return (
-                <Circle
+                <KonvaURLImage
                   key={index}
+                  src="/pins/other_pin.svg"
                   x={submap.x}
                   y={submap.y}
-                  radius={10}
-                  fill="red"
-                  onTouchStart={() => handleSubmapClick(submap)}
+                  width={100}
+                  height={100}
                   onClick={() => handleSubmapClick(submap)}
+                  onTap={() => handleSubmapClick(submap)}
                 />
+                // <Circle
+                //   key={index}
+                //   x={submap.x}
+                //   y={submap.y}
+                //   radius={10}
+                //   fill="red"
+                //   onTouchStart={() => handleSubmapClick(submap)}
+                //   onClick={() => handleSubmapClick(submap)}
+                // />
               );
             })}
           </Layer>
