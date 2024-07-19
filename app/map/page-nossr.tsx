@@ -4,7 +4,6 @@ import { SubMap } from '@/app/lib/definitions';
 import KonvaURLImage from '@/app/lib/konva-image';
 import { submaps } from '@/app/lib/submaps';
 import SubMapView from '@/app/map/submap-view';
-import { NoSSR } from 'next-dynamic-no-ssr';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -28,7 +27,6 @@ export default function Home() {
   // Overall map view
   return (
     <div className="h-screen">
-      <NoSSR>
         <Stage width={window.innerWidth} height={window.innerHeight} draggable={true}>
           <Layer>
             {/* example image */}
@@ -51,7 +49,6 @@ export default function Home() {
             })}
           </Layer>
         </Stage> 
-      </NoSSR>
       {/* <div className="flex flex-col gap-2 py-5">
         {submaps.map((pin, index) => {
           return (
