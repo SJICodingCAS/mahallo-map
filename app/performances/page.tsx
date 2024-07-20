@@ -172,7 +172,7 @@ export default function Home() {
         })}
       </div>
 
-      <h1 className="font-bold text-2xl ml-2">Founder's Hall</h1>
+      <h1 className="font-bold text-2xl ml-2">Founder&apos;s Hall</h1>
       <div className="flex flex-row gap-4 overflow-x-scroll">
         {performances.hall.map((performance, index) => {
           return (
