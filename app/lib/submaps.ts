@@ -5,7 +5,7 @@ export const submaps: SubMap[] = [
   // ISH Level 1
   {
     x: 106,
-    y: 90,
+    y: 200,
     name: "Indoor Sports Hall (L1)",
     image: "/submaps/ish_level_1.png",
     pins: [
@@ -81,6 +81,8 @@ export const submaps: SubMap[] = [
     y: 300,
     name: "Field",
     image: "/submaps/Field_cropped.png",
+    scale: 0.4,
+    pinScale: 2,
     pins: [
       {
         x: 680,
@@ -221,6 +223,8 @@ export const submaps: SubMap[] = [
     y: 302,
     name: "Track",
     image: "/submaps/Track_cropped.png",
+    scale: 0.4,
+    pinScale: 2,
     pins: [
       {
         x: 770,
@@ -277,7 +281,7 @@ export const submaps: SubMap[] = [
   },
   // ISH Level 2
   {
-    x: 56,
+    x: 75,
     y: 90,
     name: "Indoor Sports Hall (L2)",
     image: "/submaps/ish_level 2.png",

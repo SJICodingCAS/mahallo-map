@@ -7,7 +7,8 @@ import SubMapView from '@/app/map/submap-view';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Stage, Layer, Rect, Circle } from 'react-konva';
+import { Stage, Layer, Rect, Circle, Text, Group } from 'react-konva';
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Home() {
   let [currentSubmap, setCurrentSubmap] = useState<SubMap | null>(null);
@@ -20,7 +21,16 @@ export default function Home() {
   // Submap view
   if (currentSubmap) {
     return (
-      <SubMapView submap={currentSubmap} />
+      <div>
+        <header className="bg-gray-200 text-black w-screen fixed z-10 p-2 flex flex-row content-center justify-center">
+          {/* <span className="text-2xl font-bold"> &lt;  </span> */}
+          <IoIosArrowBack size={32}
+            onClick={() => setCurrentSubmap(null)}
+          />
+          <h1 className="text-2xl font-bold mx-auto">{currentSubmap.name}</h1>
+        </header>
+        <SubMapView submap={currentSubmap} />
+      </div>
     )
   }
 
@@ -38,8 +48,7 @@ export default function Home() {
           }
         }>
           <Layer>
-            {/* example image */}
-            <KonvaURLImage src="/labelled_map.png" />
+            <KonvaURLImage src="/original_map.png" />
           </Layer>
           <Layer>
             {/* Add tappable pins */}
@@ -50,38 +59,32 @@ export default function Home() {
                   src="/pins/other_pin.svg"
                   x={submap.x}
                   y={submap.y}
-                  width={100}
-                  height={100}
+                  width={75}
+                  height={75}
                   onClick={() => handleSubmapClick(submap)}
                   onTap={() => handleSubmapClick(submap)}
                 />
-                // <Circle
-                //   key={index}
-                //   x={submap.x}
-                //   y={submap.y}
-                //   radius={10}
-                //   fill="red"
-                //   onTouchStart={() => handleSubmapClick(submap)}
-                //   onClick={() => handleSubmapClick(submap)}
-                // />
               );
             })}
+
+            {/* Add text */}
+
+            {submaps.map((submap, index) => {
+              return (
+                <Text
+                  key={index}
+                  x={submap.x}
+                  y={submap.y + 75}
+                  text={submap.name}
+                  fontSize={24}
+                  fill="black"
+                  fontStyle='bold'
+                />
+              );
+            })}
+
           </Layer>
         </Stage> 
-      {/* <div className="flex flex-col gap-2 py-5">
-        {submaps.map((pin, index) => {
-          return (
-            <div key={index} className="flex flex-row gap-2">
-              <Image src="/labelled_map.png" alt='' width={50} height={50} />
-              <div className="flex flex-col">
-                <h1 className='text-lg font-bold'>{pin.details.name}</h1>
-                <p>{pin.}</p>
-                <hr />
-              </div>
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 }

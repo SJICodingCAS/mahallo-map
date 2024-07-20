@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="bg-gray-200 text-black w-screen fixed z-10 p-2 flex flex-row">
+        {/* <header className="bg-gray-200 text-black w-screen fixed z-10 p-2 flex flex-row">
           <span className="text-2xl font-bold"> &lt;  </span>
           <h1 className="text-2xl font-bold mx-auto">Mahallo Interactive Map</h1>
-        </header>
+        </header> */}
         {children}
       </body>
     </html>

@@ -5,6 +5,9 @@ export interface SubMap {
   y: number,
   // URL to the map image (to layer pins onto)
   image: string,
+  // scale
+  scale?: number,
+  pinScale?: number,
   pins: Pin[]
 }
 

@@ -22,7 +22,7 @@ export default function SubMapView({submap}: {submap: SubMap}) {
       case 3:
         return "/pins/other_pin.svg";
       case 4:
-        return "/pins/toilet_pin.svg";
+        return "/pins/toilet_male_pin.svg";
       default:
         return "/pins/other_pin.svg";
     }
@@ -43,9 +43,13 @@ export default function SubMapView({submap}: {submap: SubMap}) {
     }
   }
 
+  let getPinText = (type: number) => {
+
+  }
+
   return (
-    <div className="h-screen w-screen">
-      <Stage width={window.innerWidth} height={window.innerHeight /2 } draggable={true}>
+    <div className="w-screen min-h-screen">
+      <Stage width={window.innerWidth} height={window.innerHeight /2 } draggable={true} scale={submap.scale ? {x: submap.scale, y: submap.scale} : {x: 1, y: 1}}>
         <Layer>
           {/* example image */}
           <KonvaURLImage src={submap.image} />
@@ -54,15 +58,6 @@ export default function SubMapView({submap}: {submap: SubMap}) {
           {/* Add tappable pins */}
           {submap.pins.map((pin, index) => {
             return (
-              // <Circle
-              //   key={index}
-              //   x={submap.x}
-              //   y={submap.y}
-              //   radius={10}
-              //   fill="red"
-              //   onTouchStart={() => handlePinClick(pin)}
-              //   onClick={() => handlePinClick(pin)}
-              // />
               <KonvaURLImage 
                 key={index} 
                 src={getPinImage(pin.type)}
@@ -70,6 +65,9 @@ export default function SubMapView({submap}: {submap: SubMap}) {
                 y={pin.y}
                 width={50}
                 height={50}
+                scale={
+                  submap.pinScale ? {x: submap.pinScale, y: submap.pinScale} : {x: 1, y: 1}
+                }
                 onTouchStart={() => handlePinClick(pin)}
                 onClick={() => handlePinClick(pin)}
               />
@@ -80,13 +78,17 @@ export default function SubMapView({submap}: {submap: SubMap}) {
       <div className="h-full">
         <div className="flex flex-col gap-2 px-4 py-8">
           {submap.pins.map((pin, index) => {
+            if(pin.type == 4) {
+              return 
+            }
+
             return (
               <div key={index} className="flex flex-row gap-2">
                 <Image src={getPinThumbnail(pin.type)} alt='' width={50} height={50} />
                 <div className="flex flex-col w-full">
                   <h1 className='text-lg font-bold'>{pin.name}</h1>
                   <p>{pin.description}</p>
-                  { selectedPin == pin && <p>Selected</p> }
+                  {/* { selectedPin == pin && <p>Selected</p> } */}
                   <hr className="mt-2" />
                 </div>
               </div>
