@@ -47,9 +47,11 @@ export default function SubMapView({submap}: {submap: SubMap}) {
 
   }
 
+  let [stagePos, setStagePos] = useState({x: 0, y: 0});
+
   return (
     <div className="w-screen min-h-screen">
-      <Stage width={window.innerWidth} height={window.innerHeight /2 } draggable={true} scale={submap.scale ? {x: submap.scale, y: submap.scale} : {x: 1, y: 1}}>
+      <Stage width={window.innerWidth} height={window.innerHeight /2 } draggable={true} scale={submap.scale ? {x: submap.scale, y: submap.scale} : {x: 1, y: 1}} x={stagePos.x} y={stagePos.y}>
         <Layer>
           {/* example image */}
           <KonvaURLImage src={submap.image} />
@@ -70,6 +72,10 @@ export default function SubMapView({submap}: {submap: SubMap}) {
                 }
                 onTouchStart={() => handlePinClick(pin)}
                 onClick={() => handlePinClick(pin)}
+                imgLoad={(img: HTMLImageElement)=>{
+                  // offset page to keep in center
+                  setStagePos({x: window.innerWidth / 6 - img.width , y: window.innerHeight / 7 - img.height});
+                }}
               />
             );
           })}

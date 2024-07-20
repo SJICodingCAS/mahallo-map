@@ -357,6 +357,7 @@ export const submaps: SubMap[] = [
     y: 430,
     name: "SSO",
     image: "/submaps/sso.png",
+    scale: 1.5,
     pins: [
       {
         x: 85,
@@ -387,6 +388,7 @@ export const submaps: SubMap[] = [
     y: 520,
     name: "Founder's Hall",
     image: "/submaps/founders_hall.png",
+    scale: 1.5,
     pins: [
       {
         x: 37,

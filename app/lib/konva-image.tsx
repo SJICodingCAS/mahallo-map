@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Image as KonvaImage } from "react-konva";
 
-export default function KonvaURLImage({ src, ...props }: { src: string } & any ) {
+export default function KonvaURLImage({ src, imgLoad, ...props }: { src: string, imgLoad?: (img: HTMLImageElement) => void } & any ) {
   const [imageObj, setImageObj] = useState(new window.Image());
 
   useEffect(() => {
@@ -16,6 +16,9 @@ export default function KonvaURLImage({ src, ...props }: { src: string } & any )
 
     return () => {
       imageObj.src = "";
+      if (imgLoad) {
+        imgLoad(imageObj);
+      }
       setImageObj(new window.Image());
     };
   }, []);

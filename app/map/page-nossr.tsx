@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { Stage, Layer, Rect, Circle, Text, Group } from 'react-konva';
 import { IoIosArrowBack } from "react-icons/io";
+import Link from 'next/link';
 
 export default function Home() {
   let [currentSubmap, setCurrentSubmap] = useState<SubMap | null>(null);
@@ -37,6 +38,12 @@ export default function Home() {
   // Overall map view
   return (
     <div className="h-screen">
+      <div className='fixed top-0 right-0 z-10'>
+        {/* circular button link to /performances */}
+        {/* <h1>asdas</h1> */}
+        <Link href="/performances"><Image className="rounded-full bg-gray-200 p-2 m-2" src="/icons/performances.png" alt={''} height={64} width={64} /></Link>
+      </div>
+      <div>
         <Stage width={window.innerWidth} height={window.innerHeight} draggable={true} dragBoundFunc={
           (pos) => {
             console.log(pos);
@@ -85,6 +92,7 @@ export default function Home() {
 
           </Layer>
         </Stage> 
+      </div>
     </div>
   );
 }
